@@ -84,4 +84,3 @@ sub getEmailDate {
    my( $self ) = @_;
    return $self->{_emailDate};
 }
-1;
