@@ -1,6 +1,5 @@
 #!/usr/bin/perl 
 
-use Customers;
 use JSON::Fast;
 
 my $file = 'input.csv';
