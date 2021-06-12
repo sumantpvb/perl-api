@@ -21,13 +21,21 @@ public class CustomerController {
         return customersSchedule;		
 	}
 	
-	@GetMapping(path="/get", produces = { "application/json", "application/xml" }) 
-	public Person getPerson(@RequestParam(value = "id",required=false) Integer id,
-			@RequestParam(value="email",required=false) String email, 
-			@RequestParam(value="licenseGuid",required=false) String licenseGuid,
-			@RequestParam(value="language",required=false) String language,
-			@RequestParam(value="getRenewPrice",required=false) String getRenewPrice) {
+	@PostMapping(path="/get", produces = { "application/json", "application/xml" }) 
+	public String getPerson(@RequestParam(value = "durationMonths",required=true) String durationMonths,
+			@RequestParam(value="customerId",required=true) String customerId, 
+			@RequestParam(value="productName",required=true) String productName,
+			@RequestParam(value="domain",required=true) String domain,
+			@RequestParam(value="startDate",required=true) Date startDate) {
 		 
-		Person person = new Person();
-
+		Customers customer = new Customers();
+		customer.setCustomerId(customerId);
+		customer.setDomain(domain);
+		customer.setDurationMonths(durationMonths);
+		customer.setStartDate(startDate);
+		customer.setProductName(productName);
+		
+		String response = customerService.addCustomers(Customers);
+		return response;
+	}
 }

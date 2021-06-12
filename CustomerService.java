@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -27,5 +30,21 @@ public class CustomerService {
             e.printStackTrace();
         }
 		return customersList;
+	}
+	
+	public String addCustomers(Customers customer) {
+		String response = "";
+		
+		try (FileOutputStream fos = new FileOutputStream("C:/java/input.csv");
+			     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+
+			    // write object to file
+			    oos.writeObject(customer);
+			    response = "Success";
+			} catch (IOException ex) {
+			    ex.printStackTrace();
+			    response = "Failure";
+			}
+		return response;
 	}
 }
